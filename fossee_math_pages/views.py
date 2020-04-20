@@ -622,7 +622,7 @@ def staff_add_topics(request):
                 internship = Internship.objects.filter(internship_status='ACTIVE').first()
 
         internship_all = Internship.objects.all()
-        
+
         topic = Topic.objects.all()
 
         context = {
@@ -714,7 +714,7 @@ def staff_assign_topic(request):
 
         if request.method == 'POST':
             if "search_internship" in request.POST:
-                
+
                 first_internsip = Internship.objects.get(pk=request.POST['search_internship'])
                 print(first_internsip)
                 try:
@@ -752,25 +752,25 @@ def staff_assign_topic(request):
         return redirect('dashboard')
 
 
-@login_required
-def staff_view_interns(request):
-    if request.user.is_staff:
-        topics = AssignedTopics.objects.all()
-        internship_all = Internship.objects.all()
-        internship = Internship.objects.first()
-        internship = Internship.objects.get(pk=internship.pk)
-
-        if "search_internship" in request.POST:
-            internship = Internship.objects.get(pk=request.POST['search_internship'])
-
-        conxext = {
-            'topics': topics,
-            'internship': internship,
-            'internship_all': internship_all,
-        }
-        return render(request, 'fossee_math_pages/staff_view_interns.html', conxext)
-    else:
-        return redirect('dashboard')
+# @login_required
+# def staff_view_interns(request):
+#     if request.user.is_staff:
+#         topics = AssignedTopics.objects.all()
+#         internship_all = Internship.objects.all()
+#         internship = Internship.objects.first()
+#         internship = Internship.objects.get(pk=internship.pk)
+#
+#         if "search_internship" in request.POST:
+#             internship = Internship.objects.get(pk=request.POST['search_internship'])
+#
+#         conxext = {
+#             'topics': topics,
+#             'internship': internship,
+#             'internship_all': internship_all,
+#         }
+#         return render(request, 'fossee_math_pages/staff_view_interns.html', conxext)
+#     else:
+#         return redirect('dashboard')
 
 
 @login_required
