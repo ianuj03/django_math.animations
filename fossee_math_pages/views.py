@@ -286,11 +286,14 @@ def home_view_data(request, internship):
     if request.POST:
         search_contains_query = request.POST.get('title_contains')
         return home_search_results(request, search_contains_query)
+    
+    internship_url = '-'.join(str(details).lower().split())
 
     context = {
         'details': details,
         'topics': topics,
         'subtopics': subtopics,
+        'internship_url': internship_url,
     }
     return render(request, 'fossee_math_pages/home_view_data.html', context)
 
@@ -330,14 +333,17 @@ def index(request):
     search_contains_query = request.GET.get('title_contains')
     images = HomeImages.objects.all()
 
-    interships = Internship.objects.filter(internship_status='COMPLETED')
+    internships = Internship.objects.filter(internship_status='COMPLETED')
 
     if search_contains_query != '' and search_contains_query is not None:
         return home_search_results(request, search_contains_query)
-
+    
+    internship_url = ['-'.join(str(internship.internship_topic).lower().split()) for internship in internships]
+    internship_urls = zip(internships, internship_url)
     context = {
-        'internship': interships,
+        'internship': internships,
         'images': images,
+        'internship_urls': internship_urls
     }
 
     return render(request, 'fossee_math_pages/index.html', context)

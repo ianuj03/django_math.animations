@@ -63,21 +63,22 @@
     <hr>
     <div class="container">
         <h1>Topics</h1>
-        <hr> {% for i in internship %}
+        <hr> {% for title, url in internship_urls %}
         <div class="card mb-3 col-md-12">
             <div class="row row-no-gutters">
                 <div class="col-md-2">
-                    <img class="card-img" src="{{ i.internship_thumbnail.url }}" alt="">
+                    <img class="card-img" src="{{ title.internship_thumbnail.url }}" alt="">
                 </div>
                 <div class="col-md-10">
                     <div class="card-body">
                         <h5 class="card-title serif">
-                            <b><a
-                                    href="{% url 'home_view_data' i.internship_topic %}">{{ i.internship_topic }}</a></b></h5>
-                        <span class="card-text serif"> <i>"{{ i.internship_quote }}"</i></span>
+                            <b><a href="{% url 'home_view_data' title.internship_topic  %}"> <!--title.internship_topic -> url -->
+                                     {{ title.internship_topic }} 
+                                </a></b></h5>
+                        <span class="card-text serif"> <i>"{{ title.internship_quote }}"</i></span>
                         <p class="card-text">
                             <small class="text-muted">
-                                -- {{ i.internship_quote_author }}</small>
+                                -- {{ title.internship_quote_author }}</small>
                         </p>
                     </div>
                 </div>
